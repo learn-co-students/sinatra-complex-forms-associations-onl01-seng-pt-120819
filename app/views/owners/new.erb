@@ -2,16 +2,31 @@
 
 <form action="/owners" method="POST">
   <label>Name:</label>
-
   <br>
+  <input type="text" name="owner[name]" id="owner_name" >
 
-  <input type="text" name="owner[name]">
-
+  <p>Select an existing pet or create a new one below.</p>
+ 
   <h3>Existing Pets</h3>
   <% @pets.each do |pet| %>
     <input type="checkbox" name="owner[pet_ids][]" id="<%= pet.id %>" value="<%= pet.id %>"><%= pet.name %><br>
   <% end %>
+  <!--
+  That checkbox has a name of "owner[pet_ids][]" because we want to structure our params hash such that the array of pet IDs is stored inside the "owner" hash. We are aiming to associate the pets that have these IDs with the new owner.
+  We give the checkbox a value of the given pet's ID. This way, when that checkbox is selected, its value, i.e., the pet's ID, is what gets sent through to the params hash.
+  We give the checkbox an id of the given pet's ID so that our Capybara test can find the checkbox using the pet's ID.
+  {"owner"=>{"name"=>"Adele", "pet_ids"=>["1", "2"]}} owner hash, pet_ids key key
+  -->
   <br>
+ 
+  <h3>New Pet</h3>
+  <label>Pet Name: </label>
+  <br>
+  <input type="text" name="pet[name]" id="pet_name"></input>
+  <br><br>
+  <!--
+  {"owner"=>{"name"=>"Adele", "pet_ids"=>["1", "2"]}, "pet"=>{"name"=>"Fake Pet"}}
+  -->
 
   <input type="submit" value="Create Owner">
 </form>
