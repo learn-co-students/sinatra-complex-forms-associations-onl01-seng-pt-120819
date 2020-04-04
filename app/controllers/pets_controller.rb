@@ -10,7 +10,7 @@ class PetsController < ApplicationController
   end
 
   post '/pets' do 
-
+   
     redirect to "pets/#{@pet.id}"
   end
 
@@ -19,8 +19,8 @@ class PetsController < ApplicationController
     erb :'/pets/show'
   end
 
-  patch '/pets/:id' do 
-
+  patch '/pets/:id' do
+   
     redirect to "pets/#{@pet.id}"
   end
 end
